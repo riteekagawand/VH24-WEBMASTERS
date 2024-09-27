@@ -3,7 +3,6 @@ import React from 'react'
 import Header from '../Components/Header'
 import HeroSection from '../Components/HeroSection'
 import AboutUs from '../Components/AboutUs'
-import End from '../Components/End'
 import Project from '../Components/Project'
 import ProjectCard from '../Components/ProjectCard'
 import ProjectsSection from '../Components/ProjectsSection'
@@ -18,7 +17,7 @@ const Home = () => {
       <Header />
       <HeroSection />
       <AboutUs />
-      <End />
+    
       <Project /> 
     / <ProjectCard />
       <ProjectsSection />
