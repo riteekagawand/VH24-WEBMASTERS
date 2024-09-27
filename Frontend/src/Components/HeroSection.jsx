@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import video from '../assets/mainvid.mp4';
 import { useNavigate } from 'react-router-dom';
 
