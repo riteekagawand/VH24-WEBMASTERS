@@ -1,36 +1,48 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React from 'react';
 
 const Footer = () => (
-    <footer className="py-12 bg-black text-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <h3 className="text-xl font-bold">largerthan</h3>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold">More</h3>
-            <ul className="mt-4 space-y-2">
-              <li>Home</li>
-              <li>Team</li>
-              <li>Contact</li>
-              <li>Blog</li>
-              <li>Events</li>
-              <li>Gallery</li>
-              <li>Links</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold">Subscribe to get latest updates</h3>
-            <form className="mt-4 flex">
-              <input type="email" placeholder="Your email" className="w-full px-4 py-2 rounded-l bg-gray-800 text-white"/>
-              <button className="bg-yellow-500 text-gray-800 px-4 py-2 rounded-r">Subscribe</button>
-            </form>
-          </div>
+  <footer className="py-6 bg-black opacity-80 h-[210px] mt-16 text-white px-4">
+    <div className="container mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Left Section */}
+        <div className="flex flex-col">
+          <h3 className="text-xl font-bold">largerthan</h3>
+          <p className="mt-2 text-sm">
+            Empowering through compassion and action.
+          </p>
         </div>
-      </div>
-    </footer>
-  );
-  
 
-export default Footer
+        {/* Middle Section */}
+        <div className="flex flex-col  items-center mt-[130px]">
+          <h3 className="text-md font-bold">All Rights Reserved. @Sahaayata</h3>
+          <p className="mt-2 text-sm">
+            We care for and respond to the community.
+          </p>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex flex-col items-end">
+          <h3 className="text-xl font-bold mb-2">Subscribe to get latest updates</h3>
+          
+          <form className="flex w-full md:w-auto">
+            <input 
+              type="email" 
+              placeholder="Your email" 
+              className="px-4 py-2 rounded-md bg-gray-800 text-white w-full"
+            />
+            <button 
+              className="bg-yellow-500 text-gray-800 px-4 py-2 ml-3 rounded-md"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+);
+
+export default Footer;

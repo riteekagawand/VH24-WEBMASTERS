@@ -2,22 +2,23 @@
 import React from 'react'
 
 const Header = () => (
-    <header className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-xl font-bold">
-          largerthan<i className="fas fa-heart text-red-500"></i>
-        </div>
-        <nav className="space-x-4">
-          <a href="#" className="text-gray-700">Home</a>
-          <a href="#" className="text-gray-700">About us</a>
-          <a href="#" className="text-gray-700">What We Do</a>
-          <a href="#" className="text-gray-700">Media</a>
-          <a href="#" className="text-gray-700">Contact</a>
-        </nav>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded">Donate</button>
+  <header className="bg-white shadow-md">
+    <div className="container mx-auto px-2 py-2 flex justify-between items-center">
+      <div className="text-md font-bold flex justify-center items-center">
+        largerthan<i className="fas fa-heart text-red-500"></i>
       </div>
-    </header>
-  );
-  
+      <div className="flex-grow flex justify-center items-center">
+        <nav className="space-x-8 text-md font-semibold">
+          <a href="#" className="text-gray-700">Home</a>
+          <a href="#" className="text-gray-700">About Us</a>
+          <a href="#" className="text-gray-700">Contact Us</a>
+        </nav>
+      </div>
+      <button className="bg-yellow-500 text-white px-6 py-2 font-semibold rounded-lg border-2 border-white">
+        Join Our Community!
+      </button>
+    </div>
+  </header>
+);
 
-export default Header
+export default Header;

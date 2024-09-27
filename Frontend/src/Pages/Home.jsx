@@ -3,12 +3,7 @@ import React from 'react'
 import Header from '../Components/Header'
 import HeroSection from '../Components/HeroSection'
 import AboutUs from '../Components/AboutUs'
-import Project from '../Components/Project'
-import ProjectCard from '../Components/ProjectCard'
-import ProjectsSection from '../Components/ProjectsSection'
-import DonationsSection from '../Components/DonationsSection'
 import ContributionSection from '../Components/ContributionSection'
-import EventsSection from '../Components/EventsSection'
 import Footer from '../Components/Footer'
 
 const Home = () => {
@@ -17,13 +12,7 @@ const Home = () => {
       <Header />
       <HeroSection />
       <AboutUs />
-    
-      <Project /> 
-    / <ProjectCard />
-      <ProjectsSection />
-      <DonationsSection />
       <ContributionSection />
-      <EventsSection />
       <Footer /> 
     </div>
   )
