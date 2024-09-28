@@ -37,7 +37,7 @@ const Login = () => {
       }
 
       // Assuming a successful login redirects to a dashboard or home page
-      navigate('/dashboard'); // Change this to your desired route
+      navigate('/userdash'); // Change this to your desired route
     } catch (error) {
       setError(error.message);
     }
