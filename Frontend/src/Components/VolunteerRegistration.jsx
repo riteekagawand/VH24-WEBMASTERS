@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import bg from '../assets/registerbg.jpg';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for react-toastify
-import Header from './Header'
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -68,8 +67,6 @@ const Register = () => {
   };
 
   return (
-    <div>
-    <Header/>
     <div className="relative w-full h-screen flex items-center justify-center">
       <img
         src={bg}
@@ -78,9 +75,9 @@ const Register = () => {
       />
       
       <div className="absolute inset-0 bg-black opacity-65"></div>
-      <div className="relative w-full max-w-lg p-8 rounded-lg shadow-xl h-[680px] bg-white overflow-hidden">
-        <div className="relative w-full bg-transparent p-8">
-          <h2 className="text-2xl font-bold text-center mb-6 ">
+      <div className="relative max-w-lg p-8 rounded-lg shadow-xl h-[610px] bg-white overflow-hidden">
+        <div className="relative w-full bg-transparent ">
+          <h2 className="text-2xl font-bold text-center mb-3 ">
             Volunteer Registration
           </h2>
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -232,7 +229,6 @@ const Register = () => {
         </div>
       </div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} /> {/* Include the ToastContainer here */}
-    </div>
     </div>
   );
 };

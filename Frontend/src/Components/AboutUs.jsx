@@ -3,8 +3,8 @@ import React from 'react';
 import volunteer from '../assets/volunteer.jpg'; // Correct import of the image file
 
 const AboutUs = () => (
-  <section className="container flex justify-center items-center h-auto mx-auto px-4 py-16"> {/* Reduced min-h-screen and py-16 to py-8 */}
-    <div className="flex flex-col md:flex-row items-center">
+  <section  className="container flex justify-center items-center h-auto mx-auto px-4 py-16"> {/* Reduced min-h-screen and py-16 to py-8 */}
+    <div id='aboutUs' className="flex flex-col md:flex-row items-center">
       <div className="md:w-1/2">
         <h2 className="text-yellow-500 text-sm font-bold">KNOW ABOUT US</h2>
         <h3 className="text-3xl font-bold mt-2">Responding to Crisis</h3>

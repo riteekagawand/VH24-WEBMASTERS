@@ -1,5 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import logo from '../assets/logoLight.png'
+import { Link } from 'react-router-dom';
 
 const Footer = () => (
   <footer className="py-6 bg-black opacity-80 h-[210px] mt-16 text-white px-4">
@@ -8,7 +10,8 @@ const Footer = () => (
         
         {/* Left Section */}
         <div className="flex flex-col">
-          <h3 className="text-xl font-bold">largerthan</h3>
+          <Link to='/'><img src={ logo } className="h-16 w-44 mt-[-10px]"/> </Link>
+        
           <p className="mt-2 text-sm">
             Empowering through compassion and action.
           </p>
@@ -16,7 +19,7 @@ const Footer = () => (
 
         {/* Middle Section */}
         <div className="flex flex-col  items-center mt-[130px]">
-          <h3 className="text-md font-bold">All Rights Reserved. @Sahaayata</h3>
+          <h3 className="text-sm font-bold">All Rights Reserved. @Sahaayata</h3>
           <p className="mt-2 text-sm">
             We care for and respond to the community.
           </p>

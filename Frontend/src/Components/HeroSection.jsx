@@ -38,12 +38,12 @@ const HeroSection = () => {
       <video
         src={video}
         alt="Children smiling and playing"
-        className="w-full h-98 mt-1"
+        className="w-full h-98 "
         autoPlay
         muted
         loop
       />
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white">
+      <div id='home' className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white">
         <h1 className="text-4xl font-bold">
           Uniting Hearts,<br />
           Together We Make a Difference
