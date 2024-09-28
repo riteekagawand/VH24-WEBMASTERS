@@ -79,30 +79,30 @@ export const registerVolunteers = async (req, res) => {
 
 // User login function (login with username and password)
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ msg: 'Please enter username and password' });
+  if (!email || !password) {
+    return res.status(400).json({ msg: 'Please enter email and password' });
   }
 
   try {
     // Find user by username
-    const volunteers = await Volunteers.findOne({ username });
+    const volunteers = await Volunteers.findOne({ email });
     if (!volunteers) {
-      return res.status(400).json({ msg: 'Invalid username or password' });
+      return res.status(400).json({ msg: 'Invalid email or password' });
     }
 
     // Compare the password
     const isMatch = await bcrypt.compare(password, volunteers.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid username or password' });
+      return res.status(400).json({ msg: 'Invalid email or password' });
     }
 
     // Generate JWT token
     const payload = {
       volunteers: {
         id: volunteers._id,
-        username: volunteers.username
+        email: volunteers.email
       }
     };
 
