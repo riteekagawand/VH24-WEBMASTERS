@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logoDark.png'
 
 const Header = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -14,7 +15,7 @@ const Header = () => {
       <header className="bg-white shadow-md z-10 relative">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-xl font-bold">
-            largerthan<i className="fas fa-heart text-red-500"></i>
+            <img src={ logo } className="h-24 w-60"/> 
           </div>
           <nav className="space-x-4">
             <a href="#" className="text-gray-700">Home</a>

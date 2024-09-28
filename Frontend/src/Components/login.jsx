@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import bg from '../assets/registerbg2.jpeg';
+import bg from '../assets/registerbg.jpg';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ const Login = () => {
 
     // Mock API request (replace this with your actual API call)
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const Login = () => {
       <div className="absolute inset-0 bg-black opacity-65"></div> {/* Dark shadow */}
       <div className="absolute p-6 rounded-lg shadow-lg w-full max-w-md z-10 bg-white "> {/* Form overlay */}
         <h2 className="text-2xl font-bold  mb-4">Login</h2>
-        {error && <p className="text-red-500">{error}</p>}
+        
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block " htmlFor="email">
@@ -79,6 +79,7 @@ const Login = () => {
               required
             />
           </div>
+          {error && <p className="text-red-500">{error}</p>}<br></br>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-500 transition duration-200"
