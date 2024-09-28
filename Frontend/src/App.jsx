@@ -8,6 +8,8 @@ import OrganizationRegister from './Components/OrganizationRegister';
 import OrganizationLogin from './Components/OrganizationLogin';
 import Inventory from './Pages/Inventory';
 import UserDashboardPage from './Pages/UserDashboardPage';
+import OrganizationDashboard from './Pages/OrganizationDashboard'
+import Inventor from './Pages/Inventory-org';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
           <Route path="/organization-register" element={<OrganizationRegister />} />
           <Route path="/organization-login" element={<OrganizationLogin />} />
           <Route path='/userdash' element={<UserDashboardPage />} />
-          <Route path='/inventory' element={<Inventory />} /> {/* Ensure correct path */}
+          <Route path='/inventory' element={<Inventory />} />
+          <Route path='/org/inventor' element={<Inventor />} />
+          <Route path='/orgdash' element={<OrganizationDashboard />} /> {/* Ensure correct path */}
         </Routes>
       </div>
     </Router>

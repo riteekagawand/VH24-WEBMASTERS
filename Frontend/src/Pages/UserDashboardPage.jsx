@@ -8,7 +8,6 @@ import NotificationSettings from '../Components/NotificationSettings';
 const UserDashboardPage = () => {
   return (
     <div>
-      <Navbar />
       <Sidebar />
       <div className='flex justify-center text-black items-center h-screen'>
       <h1>Volunteer Alert System</h1>

@@ -1,10 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Sidebar = () => {
   return (
-    <div className="bg-[#FFFFFF] w-64 fixed left-0 top-[70px] flex flex-col h-full shadow-md shadow-gray-400">
+  <div className="bg-[#FFFFFF]  w-64 fixed left-0  flex flex-col h-full shadow-md shadow-gray-400">
+    <div className='flex ml-5 my-1 items-start h-20 '>
+      <img src={logo} alt="Logo" width={190} height={10} />
+      {/* <h2 className='font-bold ml-2 mt-2 text-4xl flex items-center'> Dashboard </h2> */}
+  </div>
       {/* Button Container */}
       <div className="flex flex-1 flex-col items-center">
         <Link 
