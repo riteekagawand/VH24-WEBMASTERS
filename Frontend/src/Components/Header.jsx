@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logoDark.png'
@@ -17,12 +18,11 @@ const Header = () => {
           <div className="text-xl font-bold">
             <img src={ logo } className="h-24 w-60"/> 
           </div>
-          <nav className="space-x-4">
-            <a href="#" className="text-gray-700">Home</a>
-            <a href="#" className="text-gray-700">About us</a>
-            <a href="#" className="text-gray-700">What We Do</a>
-            <a href="#" className="text-gray-700">Media</a>
-            <a href="#" className="text-gray-700">Contact</a>
+          <nav className="space-x-12">
+            <a href="#" className="text-gray-700 font-semibold">
+            Home</a>
+            <a href="#" className="text-gray-700 font-semibold">About us</a>
+            <a href="#" className="text-gray-700 font-semibold">Contact</a>
           </nav>
           <button onClick={handleVolunteerClick} className="bg-yellow-500 text-white px-6 py-2 font-semibold rounded-lg border-2 border-white">
             Login!
