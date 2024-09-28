@@ -2,16 +2,22 @@
 import React from 'react';
 import Sidebar2 from '../Components/Sidebar2';
 import Navbar from '../Components/Navbar';
-// import AlertSystem from '../Components/AlertSystem';
-// import NotificationSettings from '../Components/NotificationSettings';
+import VolunteerMap from '../Components/VolunteerMap.jsx';
 
 const UserDashboardPage = () => {
   return (
-    <div>
-      {/* <Navbar /> */}
+    <div className="flex">
+      {/* Sidebar */}
       <Sidebar2 />
-      <div className='flex justify-center text-black items-center h-screen'>
-      <h1>Volunteer Alert System</h1>
+
+      {/* Main Content */}
+      <div className='flex flex-col w-full h-screen p-4'>
+        <h1 className="text-center text-black mb-4">Organization Dashboard</h1>
+        
+        {/* Container for Map, adjusted to move right */}
+        <div className='flex ml-[350px] items-center'>
+          <VolunteerMap className='h-[500px] w-[1000px]' />
+        </div>
       </div>
     </div>
   );

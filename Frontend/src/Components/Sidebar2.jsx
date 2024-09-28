@@ -8,7 +8,7 @@ const Sidebar2 = () => {
     <div className="bg-[#FFFFFF]  w-64 fixed left-0  flex flex-col h-full shadow-md shadow-gray-400">
      
       <div className='flex ml-5 my-1 items-start h-20 '>
-        <img src={logo} alt="Logo" width={190} height={10} />
+      <Link to='/'><img src={logo} alt="Logo" width={190} height={10} /></Link>
         {/* <h2 className='font-bold ml-2 mt-2 text-4xl flex items-center'> Dashboard </h2> */}
     </div>
       {/* Button Container */}

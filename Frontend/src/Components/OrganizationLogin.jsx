@@ -29,7 +29,7 @@ const OrganizationLogin = ({ toggleForm }) => {
 
       if (response.ok) {
         toast.success('Login successful!');
-        navigate('/'); // Redirect to dashboard or any other page
+        navigate('/orgdash'); // Redirect to dashboard or any other page
       } else {
         setMessage(data.message);
       }
