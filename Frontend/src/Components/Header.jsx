@@ -1,38 +1,37 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logoDark.png';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import logo from '../assets/logoDark.png';
+import Auth from './Auth'; // Import your Auth component
 
 const Header = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const [isVisible, setIsVisible] = useState(true); // State to manage header visibility
-  const [lastScrollY, setLastScrollY] = useState(0); // To store last scroll position
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showAuthModal, setShowAuthModal] = useState(false); // State to toggle the auth modal
 
-  // Scroll event listener
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-    
-    // Show header when scrolling up, hide when scrolling down
     if (currentScrollY < lastScrollY || currentScrollY < 100) {
-      setIsVisible(true); // Show header when scrolling up or when near the top
+      setIsVisible(true);
     } else {
-      setIsVisible(false); // Hide header when scrolling down
+      setIsVisible(false);
     }
-    setLastScrollY(currentScrollY); // Update the last scroll position
+    setLastScrollY(currentScrollY);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll); // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll); // Clean up on component unmount
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [lastScrollY]);
 
-  // Navigate to registration page when "Volunteer" is clicked
-  const handleVolunteerClick = () => {
-    navigate('/login'); // Change '/register' to your registration route
+  const handleLoginClick = () => {
+    setShowAuthModal(true); // Open auth modal
+  };
+
+  const closeAuthModal = () => {
+    setShowAuthModal(false); // Close auth modal
   };
 
   return (
@@ -48,7 +47,6 @@ const Header = () => {
             <HashLink smooth to='/#home' className="text-gray-700 font-semibold">
               Home
             </HashLink>
-            {/* HashLinks with smooth scroll */}
             <HashLink smooth to='/#aboutUs' className="text-gray-700 font-semibold">
               About Us
             </HashLink>
@@ -57,13 +55,31 @@ const Header = () => {
             </HashLink>
           </nav>
           <button
-            onClick={handleVolunteerClick}
+            onClick={handleLoginClick}
             className="bg-yellow-500 text-white px-6 py-2 font-semibold rounded-lg border-2 border-white"
           >
             Login
           </button>
         </div>
       </header>
+
+      {/* Modal - Auth Form */}
+      {showAuthModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            {/* Close button */}
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+              onClick={closeAuthModal}
+            >
+              &times;
+            </button>
+
+            {/* Auth Component */}
+            <Auth toggleForm={closeAuthModal} />
+          </div>
+        </div>
+      )}
     </>
   );
 };
