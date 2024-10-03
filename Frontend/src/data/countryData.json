@@ -1,0 +1,59 @@
+[
+    {
+      "name": "United States",
+      "capital": "Washington, D.C.",
+      "population": 331002651,
+      "language": "English",
+      "flag": "https://restcountries.com/v3.1/data/usa.svg"
+    },
+    {
+      "name": "Canada",
+      "capital": "Ottawa",
+      "population": 37742154,
+      "language": "English, French",
+      "flag": "https://restcountries.com/v3.1/data/can.svg"
+    },
+    {
+      "name": "Brazil",
+      "capital": "Brasilia",
+      "population": 212559417,
+      "language": "Portuguese",
+      "flag": "https://restcountries.com/v3.1/data/bra.svg"
+    },
+    {
+      "name": "Germany",
+      "capital": "Berlin",
+      "population": 83783942,
+      "language": "German",
+      "flag": "https://restcountries.com/v3.1/data/deu.svg"
+    },
+    {
+      "name": "India",
+      "capital": "New Delhi",
+      "population": 1380004385,
+      "language": "Hindi, English",
+      "flag": "https://restcountries.com/v3.1/data/ind.svg"
+    },
+    {
+      "name": "China",
+      "capital": "Beijing",
+      "population": 1439323776,
+      "language": "Mandarin",
+      "flag": "https://restcountries.com/v3.1/data/chn.svg"
+    },
+    {
+      "name": "Australia",
+      "capital": "Canberra",
+      "population": 25499884,
+      "language": "English",
+      "flag": "https://restcountries.com/v3.1/data/aus.svg"
+    },
+    {
+      "name": "South Africa",
+      "capital": "Pretoria",
+      "population": 59308690,
+      "language": "English, Afrikaans",
+      "flag": "https://restcountries.com/v3.1/data/zaf.svg"
+    }
+  ]
+  
