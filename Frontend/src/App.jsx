@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../src/Pages/Home';
-import Register from './Components/Register';
+import DailyStreakChallenge from './Components/DailyStreakChallenge';
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
-
+            <Route path="/Streak" element={<DailyStreakChallenge/>} />
            
           </Routes>
         </div>
