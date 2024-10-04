@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import del from "../../public/del.png";
-import guarantee from "../../public/guarantee.png";
-import learn from "../../public/learn.png";
+import del from "../assets/del.png";
+import guarantee from "../assets/guarantee.png";
+import learn from "../assets/learn.png";
 
 const Serve = () => {
   return (

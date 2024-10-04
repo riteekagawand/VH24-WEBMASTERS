@@ -2,7 +2,7 @@
 import React from "react";
 import Lottie from 'react-lottie';
 import delivery from '../assets/json/Delivery.json';  // Make sure the path is correct for your animation file
-import happy from "../../public/happy.png"
+import happy from "../assets/happy.png"
 
 const HeroSection = () => {
   // Lottie configuration
