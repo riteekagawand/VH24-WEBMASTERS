@@ -15,12 +15,15 @@ const Header = () => {
       </div>
       <nav className="flex space-x-12 items-center font-semibold">
         <a href="#" className="text-gray-700 hover:text-red-600">
-          Why Foodeli?
+          Why SwiftPath?
         </a>
-        
+        <a href="#" className="text-gray-700 hover:text-red-600">
+          Testimonials
+        </a>
         <a href="#" className="text-gray-700 hover:text-red-600">
           Contact Us
         </a>
+        
         {/* <a href="#" className="text-gray-700 hover:text-red-600">
           <FontAwesomeIcon icon={faSearch} />
         </a>

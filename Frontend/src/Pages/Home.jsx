@@ -14,9 +14,9 @@ const Home = () => {
     
       <Serve />
    
-      <div className="flex flex-col mt-9">
+      <div className="flex flex-col mt-8">
         {/* Centered Testimonials Text */}
-        <h2 className="text-center text-3xl font-bold mb-6">Testimonials</h2>
+        <h2 className="text-center text-3xl font-bold mb-14">Testimonials</h2>
         
         <ScrollingCards direction="left" />
         <ScrollingCards direction="right" />
