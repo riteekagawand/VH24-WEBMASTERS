@@ -1,7 +1,7 @@
-const Otp = require('../models/Otp');
-const nodemailer = require('nodemailer');
+import Otp from '../models/Otp.js';
+import nodemailer from 'nodemailer';
 
-exports.sendOtp = async (req, res) => {
+export const sendOtp = async (req, res) => {
   const { email } = req.body;
   const otp = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
 
@@ -35,7 +35,7 @@ exports.sendOtp = async (req, res) => {
   }
 };
 
-exports.verifyOtp = async (req, res) => {
+export const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
