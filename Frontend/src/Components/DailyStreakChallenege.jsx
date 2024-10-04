@@ -1,69 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast'; // Toast for notifications
 
 const DailyStreakChallenge = () => {
-  const [daysCollected, setDaysCollected] = useState(Array(7).fill(false));
-  const [currentDay, setCurrentDay] = useState(1);
-  const [daysUnlocked, setDaysUnlocked] = useState(Array(7).fill(false));
-
-  // Load stored state on component mount
+  // State to track the collected status for each day
+  const [daysCollected, setDaysCollected] = useState(Array(7).fill(false)); // 7 days collection status (false initially)
+  const [currentDay, setCurrentDay] = useState(1); // Start with day 1
+  const [daysUnlocked, setDaysUnlocked] = useState(Array(7).fill(false)); // Unlock days for collection
+  
   useEffect(() => {
-    const savedCurrentDay = localStorage.getItem('currentDay');
-    const savedDaysCollected = localStorage.getItem('daysCollected');
-
-    if (savedCurrentDay) setCurrentDay(JSON.parse(savedCurrentDay));
-    if (savedDaysCollected) setDaysCollected(JSON.parse(savedDaysCollected));
-  }, []);
-
-  // Update unlocked days when the current day changes
-  useEffect(() => {
+    // Unlock the current day
     const newDaysUnlocked = [...daysUnlocked];
-    newDaysUnlocked[currentDay - 1] = true;
+    newDaysUnlocked[currentDay - 1] = true; // Unlock current day
     setDaysUnlocked(newDaysUnlocked);
-  }, [currentDay]);
 
-  // Unlock the next day after 24 hours
-  useEffect(() => {
+    // Set up time interval to unlock the next day after 24 hours
     const unlockNextDay = setTimeout(() => {
       if (currentDay < 7) {
-        setCurrentDay((prevDay) => {
-          const newDay = prevDay + 1;
-          localStorage.setItem('currentDay', JSON.stringify(newDay)); // Store current day in localStorage
-          return newDay;
-        });
+        setCurrentDay(prevDay => prevDay + 1); // Move to the next day
       }
     }, 86400000); // 24 hours in milliseconds
 
-    return () => clearTimeout(unlockNextDay);
+    return () => clearTimeout(unlockNextDay); // Clean up timer
   }, [currentDay]);
 
-  const handleCollect = async (day) => {
+  const handleCollect = (day) => {
     if (daysCollected[day - 1]) {
+      // If the reward for the day is already collected, show an error toast
       toast.error('Daily rewards already collected');
     } else {
-      try {
-        const coins = 100; // Reward value
-        const response = await axios.put('/api/leaderboard/update', { day, coins });
-    
-        if (response.status === 200) {
-          const newDaysCollected = [...daysCollected];
-          newDaysCollected[day - 1] = true;
-          setDaysCollected(newDaysCollected);
-          localStorage.setItem('daysCollected', JSON.stringify(newDaysCollected));
-    
-          toast.success('Daily rewards collected');
-        } else {
-          throw new Error('Failed to collect rewards');
-        }
-      } catch (error) {
-        toast.error('Error collecting rewards');
-        console.error('Error collecting rewards:', error);
-      }
+      // If it's the first collection, mark it as collected and show a success toast
+      const newDaysCollected = [...daysCollected];
+      newDaysCollected[day - 1] = true; // Mark the day as collected
+      setDaysCollected(newDaysCollected);
+
+      toast.success('Daily rewards collected');
     }
   };
-  
-  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white text-black">
@@ -71,6 +43,7 @@ const DailyStreakChallenge = () => {
         <h2 className="text-2xl mb-6">Daily Streak Challenge</h2>
 
         <div className="flex items-center space-x-6">
+          {/* Day Progress */}
           {daysUnlocked.map((dayUnlocked, index) => (
             <div key={index} className="flex flex-col items-center">
               <div
@@ -81,7 +54,7 @@ const DailyStreakChallenge = () => {
                 {dayUnlocked ? (
                   <span>{index + 1}</span>
                 ) : (
-                  <span className="text-black">🔒</span>
+                  <span className="text-black">🔒</span> // Lock icon color updated to black
                 )}
               </div>
               <p className="mt-2">Day {index + 1}</p>
@@ -89,15 +62,17 @@ const DailyStreakChallenge = () => {
           ))}
         </div>
 
+        {/* Collect button */}
         <button
           className="mt-6 bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-400 disabled:opacity-50"
-          disabled={!daysUnlocked[currentDay - 1]}
-          onClick={() => handleCollect(currentDay)}
+          disabled={!daysUnlocked[currentDay - 1]} // Disable if the current day is not unlocked yet
+          onClick={() => handleCollect(currentDay)} // Handle collection for the current day
         >
           {daysCollected[currentDay - 1] ? 'Collected' : 'Collect'}
         </button>
       </div>
 
+      {/* Display Toast */}
       <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
