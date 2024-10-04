@@ -18,17 +18,17 @@ export default  {
         loopRight: "loopRight 20s linear infinite",
       },
       colors: {
-        "light-green-1": "#D3EE98",
-        "light-green-2": "#A0D683",
-        "light-green-3": "#72BF78",
-        "light-green-4": "#54C392",
-        "light-green-5": "#15B392",
+        "light-green-1": "#FFAAAA",
+        "light-green-2": "#FF7777",
+        "light-green-3": "#FF8A8A",
+        "light-green-4": "#D91656",
+        "light-green-5": "#C7253E",
       },
       backgroundImage: {
         "custom-gradient-green-right":
-          "linear-gradient(to bottom right, #D3EE98, #A0D683, #72BF78,  #15B392)",
+          "linear-gradient(to bottom right, #FFAAAA, #FF7777, #FF8A8A,  #D91656)",
         "custom-gradient-green-left":
-          "linear-gradient(to top left, #D3EE98, #A0D683, #72BF78,  #15B392)",
+          "linear-gradient(to top left, #FFAAAA, #FF7777, #FF8A8A,  #D91656)",
       },
     },
   },

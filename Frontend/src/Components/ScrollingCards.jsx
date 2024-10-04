@@ -23,9 +23,9 @@ const ScrollingCards = ({ direction = "left" }) => {
   };
 
   return (
-    <div className="w-[1200px] mt-20 m-auto overflow-hidden relative">
+    <div className="w-full mt-2 m-auto overflow-hidden relative">
       <div
-        className={`flex gap-4 ${
+        className={`flex gap-2 ${
           direction === "left" ? "animate-loopLeft" : "animate-loopRight"
         } space-x-4 duration-150`}
         ref={marqueeRef}
@@ -35,7 +35,7 @@ const ScrollingCards = ({ direction = "left" }) => {
         {extendedCards.map((card, index) => (
           <div
             key={index}
-            className={`card hover:scale-95 w-80 h-40 flex-shrink-0 flex flex-col justify-between my-2 px-4 py-6 rounded-xl shadow-slate-500 shadow-md ${
+            className={`card hover:scale-95 w-80 h-36 flex-shrink-0 flex flex-col justify-between my-2 px-4 py-6 rounded-xl shadow-slate-500 shadow-md ${
               direction === "left"
                 ? "bg-custom-gradient-green-right"
                 : "bg-custom-gradient-green-left"
