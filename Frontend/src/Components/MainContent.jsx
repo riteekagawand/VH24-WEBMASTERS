@@ -75,8 +75,8 @@ const HeroSection = () => {
       <div className="w-1/2 relative">
         {/* Lottie Animation */}
         <Lottie options={defaultOptions} height="100%" width="100%" />
-
-        {/* Courier Info */}
+{/* 
+        Courier Info
         <div className="absolute bottom-0 left-10 transform translate-y-1/2 bg-white p-4 rounded-full shadow-lg flex items-center space-x-2">
           <img
             src="https://placehold.co/50x50"
@@ -84,31 +84,14 @@ const HeroSection = () => {
             className="rounded-full"
           />
           <div>
-            <p className="font-bold">Richard Watson</p>
+            <p className="font-bold"></p>
             <p className="text-gray-600 text-sm">Food Courier</p>
           </div>
           <i className="fas fa-phone-alt text-red-600"></i>
-        </div>
+        </div> */}
 
-        {/* Pizza Info */}
-        <div className="absolute bottom-0 right-10 transform translate-y-1/2 bg-white p-4 rounded-full shadow-lg flex items-center space-x-2">
-          <img
-            src="https://placehold.co/50x50"
-            alt="Pizza"
-            className="rounded-full"
-          />
-          <div>
-            <p className="font-bold">Italian Pizza</p>
-            <div className="flex items-center">
-              <i className="fas fa-star text-yellow-500"></i>
-              <i className="fas fa-star text-yellow-500"></i>
-              <i className="fas fa-star text-yellow-500"></i>
-              <i className="fas fa-star text-yellow-500"></i>
-              <i className="fas fa-star-half-alt text-yellow-500"></i>
-            </div>
-            <p className="text-gray-600 text-sm">$7.49</p>
-          </div>
-        </div>
+        
+        
       </div>
     </main>
   );

@@ -49,11 +49,11 @@ const ScrollingCards = ({ direction = "left" }) => {
               />
               <div>
                 <h3 className="text-xl font-bold">{card.name}</h3>
-                <span className="text-black">{card.username}</span>
+                <span className="text-white">{card.username}</span>
               </div>
             </div>
             <div>
-              <p className="text-md text-center text-gray-900">
+              <p className="text-md text-center text-white">
                 {card.message}
               </p>
             </div>
