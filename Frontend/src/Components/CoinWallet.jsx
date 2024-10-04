@@ -9,7 +9,7 @@ const CoinWallet = () => {
   // Fetch initial coins from the backend
   const fetchCoins = async () => {
     try {
-      const response = await axios.get('/api/get-user-coins'); // Update with your actual endpoint
+      const response = await axios.get('/update'); // Update with your actual endpoint
       setCoins(response.data.coins); // Adjust based on your response structure
     } catch (error) {
       console.error('Error fetching coins:', error);

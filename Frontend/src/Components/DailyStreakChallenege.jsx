@@ -7,16 +7,33 @@ const DailyStreakChallenge = () => {
   const [currentDay, setCurrentDay] = useState(1);
   const [daysUnlocked, setDaysUnlocked] = useState(Array(7).fill(false));
 
+  // Load stored state on component mount
+  useEffect(() => {
+    const savedCurrentDay = localStorage.getItem('currentDay');
+    const savedDaysCollected = localStorage.getItem('daysCollected');
+
+    if (savedCurrentDay) setCurrentDay(JSON.parse(savedCurrentDay));
+    if (savedDaysCollected) setDaysCollected(JSON.parse(savedDaysCollected));
+  }, []);
+
+  // Update unlocked days when the current day changes
   useEffect(() => {
     const newDaysUnlocked = [...daysUnlocked];
     newDaysUnlocked[currentDay - 1] = true;
     setDaysUnlocked(newDaysUnlocked);
+  }, [currentDay]);
 
+  // Unlock the next day after 24 hours
+  useEffect(() => {
     const unlockNextDay = setTimeout(() => {
       if (currentDay < 7) {
-        setCurrentDay((prevDay) => prevDay + 1);
+        setCurrentDay((prevDay) => {
+          const newDay = prevDay + 1;
+          localStorage.setItem('currentDay', JSON.stringify(newDay)); // Store current day in localStorage
+          return newDay;
+        });
       }
-    }, 86400000);
+    }, 86400000); // 24 hours in milliseconds
 
     return () => clearTimeout(unlockNextDay);
   }, [currentDay]);
@@ -25,19 +42,28 @@ const DailyStreakChallenge = () => {
     if (daysCollected[day - 1]) {
       toast.error('Daily rewards already collected');
     } else {
-      const newDaysCollected = [...daysCollected];
-      newDaysCollected[day - 1] = true;
-      setDaysCollected(newDaysCollected);
-
       try {
-        await axios.post('/api/update-coins', { coins: 100 }); // Send the collected reward to the backend
-        toast.success('Daily rewards collected');
+        const coins = 100; // Reward value
+        const response = await axios.put('/api/leaderboard/update', { day, coins });
+    
+        if (response.status === 200) {
+          const newDaysCollected = [...daysCollected];
+          newDaysCollected[day - 1] = true;
+          setDaysCollected(newDaysCollected);
+          localStorage.setItem('daysCollected', JSON.stringify(newDaysCollected));
+    
+          toast.success('Daily rewards collected');
+        } else {
+          throw new Error('Failed to collect rewards');
+        }
       } catch (error) {
         toast.error('Error collecting rewards');
         console.error('Error collecting rewards:', error);
       }
     }
   };
+  
+  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white text-black">

@@ -12,15 +12,10 @@ const Leaderboard = () => {
       try {
         const response = await axios.get('/api/leaderboard'); // Make sure the URL is correct
         const data = response.data;
-
-        // Assign ranks if they are not included in the data
-        const rankedData = data.map((user, index) => ({
-          ...user,
-          rank: index + 1, // Assuming rank starts from 1
-        }));
-
-        setLeaderboardData(rankedData);
-        setCurrentUser(rankedData.find(user => user.name === 'aarchy_parekh')); // Replace with the actual logged-in user name
+        console.log('Fetched Leaderboard Data:', JSON.stringify(data, null, 2));
+        setLeaderboardData(data); // Use data directly without ranking
+        // setCurrentUser(data.findAll()); // Replace with the actual logged-in user name
+       
       } catch (err) {
         setError('Failed to fetch leaderboard data');
       } finally {
@@ -55,12 +50,11 @@ const Leaderboard = () => {
             <div className="ml-4">
               <p className="font-bold text-lg">{currentUser.name}</p>
               <p className="text-yellow-500 text-sm flex items-center">
-                <span>{currentUser.coins.toLocaleString()}</span> {/* Change `coins` as per your response structure */}
+                <span>{currentUser.coins.toLocaleString()}</span> {/* Adjust `coins` as per your response structure */}
                 <span className="ml-1">🪙</span>
               </p>
             </div>
           </div>
-          <span className="text-xl">{currentUser.rank}</span> {/* Assuming rank is also provided */}
         </div>
       )}
 
@@ -68,11 +62,10 @@ const Leaderboard = () => {
       <div className="py-4">
         {leaderboardData.map((user) => (
           <div
-            key={user.rank}
+            key={user.name} // Use user's name or a unique identifier
             className="flex items-center justify-between py-2 border-b border-gray-200"
           >
             <div className="flex items-center">
-              <div className="text-lg font-bold mr-4">{user.rank}</div>
               <div className="w-8 h-8 rounded-full bg-blue-300"></div>
               <div className="ml-4">
                 <p className="font-semibold">{user.name}</p>

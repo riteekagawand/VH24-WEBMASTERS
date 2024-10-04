@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Lottie from 'react-lottie';
 import globe from '../assets/json/GLOBE.json';
-import countryData from '../data/countryData.json'; // Local country dataset
+import countryData from '../data/countryData.json'; // Local country 
+
 
 const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);

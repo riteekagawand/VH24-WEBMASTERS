@@ -2,21 +2,25 @@ import Leaderboard from '../models/leaderboard.js';
 
 // Get all leaderboard data sorted by coins
 export const getLeaderboard = async (req, res) => {
-  try {
-    const leaderboardData = await Leaderboard.find().sort({ coins: -1 });
-
-    // Recalculate ranks based on sorted order
-    
-
-    // Save updated ranks
-    await Promise.all(leaderboardData.map(user => user.save()));
-
-    res.json(leaderboardData);
-  } catch (err) {
-    console.error(err); // Log the error for debugging
-    res.status(500).json({ message: 'Error retrieving leaderboard data' });
-  }
-};
+    try {
+      console.log("Fetching leaderboard data...");
+  
+      const leaderboardData = await Leaderboard.find().sort({ coins: -1 });
+  
+      console.log("Leaderboard data retrieved:", leaderboardData);  // Log data
+  
+      if (!leaderboardData || leaderboardData.length === 0) {
+        console.log("No data found in leaderboard.");
+        return res.status(404).json({ message: 'No leaderboard data found' });
+      }
+  
+      res.json(leaderboardData);
+    } catch (err) {
+      console.error("Error fetching leaderboard data:", err);
+      res.status(500).json({ message: 'Error retrieving leaderboard data' });
+    }
+  };
+  
 
 // Add a new user to the leaderboard (dummy data via Postman)
 export const addDummyData = async (req, res) => {

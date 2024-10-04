@@ -3,6 +3,7 @@ import RegistrationForm from './Components/Registration';
 import Login from './Components/Login';
 import Home from './Pages/Home';
 import Leaderboard from './Components/LeaderBoard';
+import DailyStreakChallenge from './Components/DailyStreakChallenege';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/' element={<Home />}/>
           <Route path='/leader' element={<Leaderboard />} />
+          <Route path='/daily' element={<DailyStreakChallenge/>}/>
         </Routes>
       </div>
     </Router>
