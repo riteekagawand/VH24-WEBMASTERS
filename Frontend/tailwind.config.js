@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -12,11 +11,14 @@ module.exports = {
           "0%": { transform: "translateX(-100%)" }, // Start from 100% (off-screen right)
           "100%": { transform: "translateX(0)" }, // Move to 0 (fully in view from right)
         },
+        
       },
       animation: {
         loopLeft: "loopLeft 20s linear infinite",
         loopRight: "loopRight 20s linear infinite",
+        
       },
+      
       colors: {
         "light-green-1": "#D3EE98",
         "light-green-2": "#A0D683",
@@ -30,6 +32,7 @@ module.exports = {
         "custom-gradient-green-left":
           "linear-gradient(to top left, #D3EE98, #A0D683, #72BF78,  #15B392)",
       },
+      
     },
   },
   plugins: [],
