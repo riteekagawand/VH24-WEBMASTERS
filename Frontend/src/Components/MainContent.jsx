@@ -2,6 +2,7 @@
 import React from "react";
 import Lottie from 'react-lottie';
 import delivery from '../assets/json/Delivery.json';  // Make sure the path is correct for your animation file
+import happy from "../../public/happy.png"
 
 const HeroSection = () => {
   // Lottie configuration
@@ -44,33 +45,14 @@ const HeroSection = () => {
     
         </div>
 
-        {/* Customer Reviews */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center">
           <img
-            src="https://placehold.co/50x50"
-            alt="Happy customer 1"
-            className="rounded-full"
+            src={happy} // Replace with the path to your image
+            alt="Happy customer"
+            className="rounded-full w-72 h-full object-cover" // Full space size
           />
-          <img
-            src="https://placehold.co/50x50"
-            alt="Happy customer 2"
-            className="rounded-full"
-          />
-          <img
-            src="https://placehold.co/50x50"
-            alt="Happy customer 3"
-            className="rounded-full"
-          />
-          <div>
-            <p className="font-bold">Our Happy Customer</p>
-            <div className="flex items-center">
-              <i className="fas fa-star text-yellow-500"></i>
-              <span className="ml-1">4.8 (12.5k Review)</span>
-            </div>
-          </div>
         </div>
       </div>
-
       {/* Right: Lottie Animation */}
       <div className="w-1/2 relative">
         {/* Lottie Animation */}

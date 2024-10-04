@@ -8,10 +8,10 @@ const Header = () => {
     <header className="flex justify-between shadow-sm shadow-gray-400 items-center py-6 px-10">
       <div className="flex items-center">
         <div className="bg-red-600 text-white px-4 py-2 rounded-md">
-          <span className="font-bold text-lg">FO</span>
-          <span className="font-bold text-lg">DO</span>
+          <span className="font-bold text-lg">S</span>
+          <span className="font-bold text-lg">P</span>
         </div>
-        <span className="ml-3 text-xl font-bold">Foodeli</span>
+        <span className="ml-3 text-xl font-bold">SwiftPath</span>
       </div>
       <nav className="flex space-x-12 items-center font-semibold">
         <a href="#" className="text-gray-700 hover:text-red-600">
