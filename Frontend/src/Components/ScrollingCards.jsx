@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react"; // Import useRef for managing animation state
 import { leftCards, rightCards } from "../helper"; // Import the cards arrays
 
 const ScrollingCards = ({ direction = "left" }) => {
@@ -6,19 +6,36 @@ const ScrollingCards = ({ direction = "left" }) => {
   const cards = direction === "left" ? leftCards : rightCards;
 
   // Extend the cards array to allow infinite scrolling
-  const extendedCards = [...cards, ...cards, ...cards ,]; // Duplicate cards three times to ensure smooth transition
+  const extendedCards = [...cards, ...cards, ...cards]; // Duplicate cards three times to ensure smooth transition
+
+  const marqueeRef = useRef(null); // Create a ref to the marquee
+
+  const handleMouseEnter = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.style.animationPlayState = "paused"; // Pause animation on hover
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.style.animationPlayState = "running"; // Resume animation on leave
+    }
+  };
 
   return (
-    <div className="w-full m-auto overflow-hidden relative  ">
+    <div className="w-full m-auto overflow-hidden relative">
       <div
-        className={`flex gap-2 ${
+        className={`flex gap-4 ${
           direction === "left" ? "animate-loopLeft" : "animate-loopRight"
-        } space-x-4`}
+        } space-x-4 duration-150`}
+        ref={marqueeRef}
+        onMouseEnter={handleMouseEnter} // Add hover event
+        onMouseLeave={handleMouseLeave} // Add leave event
       >
         {extendedCards.map((card, index) => (
           <div
             key={index}
-            className={`card w-80 h-40 flex-shrink-0 flex flex-col justify-between my-2 px-4 py-6 rounded-xl  shadow-slate-800 shadow-md ${
+            className={`card hover:scale-95 w-80 h-40 flex-shrink-0 flex flex-col justify-between my-2 px-4 py-6 rounded-xl shadow-slate-500 shadow-md ${
               direction === "left"
                 ? "bg-custom-gradient-green-right"
                 : "bg-custom-gradient-green-left"
@@ -36,7 +53,7 @@ const ScrollingCards = ({ direction = "left" }) => {
               </div>
             </div>
             <div>
-              <p className="text-md text-center text-gray-900 ">
+              <p className="text-md text-center text-gray-900">
                 {card.message}
               </p>
             </div>

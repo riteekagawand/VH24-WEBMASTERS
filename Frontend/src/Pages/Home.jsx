@@ -14,7 +14,7 @@ const Home = () => {
       <HeroSection />
       {/* <AboutUs />
       <ContributionSection /> */}
-      <div className="flex flex-col  mt-12 gap-2">
+      <div className="flex flex-col  mt-12 gap-4">
         <ScrollingCards direction="left" />
         <ScrollingCards direction="right" />
       </div>
