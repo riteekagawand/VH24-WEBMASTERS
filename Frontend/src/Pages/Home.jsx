@@ -1,21 +1,26 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import Header from '../Components/Header'
- import HeroSection from '../Components/HeroSection'
+import React from "react";
+import Header from "../Components/Header";
+import HeroSection from "../Components/HeroSection";
 // import AboutUs from '../Components/AboutUs'
 // import ContributionSection from '../Components/ContributionSection'
- import Footer from '../Components/Footer'
+import Footer from "../Components/Footer";
+import ScrollingCards from "../Components/ScrollingCards";
 
 const Home = () => {
   return (
-    <div>
+    <div className="flex flex-col ">
       <Header />
       <HeroSection />
       {/* <AboutUs />
       <ContributionSection /> */}
-      <Footer /> 
+      <div className="flex flex-col  mt-12 gap-2">
+        <ScrollingCards direction="left" />
+        <ScrollingCards direction="right" />
+      </div>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
