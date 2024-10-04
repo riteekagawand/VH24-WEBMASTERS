@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 node_modules
@@ -15,3 +16,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+node_modules
+.env
+>>>>>>> c7a4484ffd9b0a14aacc8c35c90f4190b1b893d0

@@ -1,20 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RegistrationForm from './Components/Registration';
-import Login from './Components/Login';
+// App.jsx
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
 import Home from './Pages/Home';
-
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div >
-        <Routes>
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path='/' element={<Home />}/>
-        </Routes>
-      </div>
-    </Router>
+    <div className="bg-white min-h-screen">
+      <Home />
+    </div>
   );
-}
+};
 
 export default App;

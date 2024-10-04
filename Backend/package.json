@@ -1,15 +1,24 @@
 {
   "name": "backend",
   "version": "1.0.0",
+<<<<<<< HEAD
   "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+=======
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> c7a4484ffd9b0a14aacc8c35c90f4190b1b893d0
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "description": "",
   "dependencies": {
     "backend": "file:",
@@ -19,5 +28,11 @@
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0"
+=======
+  "dependencies": {
+    "backend": "file:",
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0"
+>>>>>>> c7a4484ffd9b0a14aacc8c35c90f4190b1b893d0
   }
 }
