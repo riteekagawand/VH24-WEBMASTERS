@@ -5,7 +5,7 @@ import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   return (
-    <header className="flex justify-between items-center py-6 px-10">
+    <header className="flex justify-between shadow-sm shadow-gray-400 items-center py-6 px-10">
       <div className="flex items-center">
         <div className="bg-red-600 text-white px-4 py-2 rounded-md">
           <span className="font-bold text-lg">FO</span>

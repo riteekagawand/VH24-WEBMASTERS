@@ -15,7 +15,7 @@ const HeroSection = () => {
   };
 
   return (
-    <main className="flex items-center justify-between px-10 py-10">
+    <main className="flex items-center justify-between px-10 py-10 mt-8">
       {/* Left: Text Content */}
       <div className="w-1/2 ml-10">
         {/* Tagline */}
