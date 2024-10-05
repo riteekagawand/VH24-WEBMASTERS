@@ -1,4 +1,4 @@
-import { ChevronFirst, ChevronLast, MoreVertical, Grid, BookOpen } from "lucide-react"; // importing icons
+import { ChevronFirst, ChevronLast, MoreVertical, Grid, BookOpen } from "lucide-react";
 import { createContext, useContext, useState } from "react";
 
 const SidebarContext = createContext();
@@ -7,7 +7,6 @@ export default function Sidebar({ children }) {
     const [expanded, setExpanded] = useState(true);
     return (
         <>
-            {/* Make sure the container takes the full height */}
             <aside className="h-screen-max flex">
                 <nav className="h-full w-full flex flex-col bg-white border-r shadow-sm">
                     <div className="p-4 pb-2 flex justify-between items-center">
@@ -18,7 +17,6 @@ export default function Sidebar({ children }) {
 
                     <SidebarContext.Provider value={{ expanded }}>
                         <ul className="flex-1 px-3">
-                            {/* Sidebar Items */}
                             <SidebarItem icon={<Grid className="text-red-500 " />} text="Dashboard" />
                             <SidebarItem icon={<BookOpen className="text-red-500" />} text="Training" />
                         </ul>

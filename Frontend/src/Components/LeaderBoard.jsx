@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const Leaderboard = () => {
@@ -6,6 +6,8 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const scrollRef = useRef(null);
+  const redLineRef = useRef(null);
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
@@ -39,6 +41,17 @@ const Leaderboard = () => {
     return <div className="text-center text-red-500">{error}</div>;
   }
 
+  // Update red line position on scroll
+  const handleScroll = () => {
+    const scrollHeight = scrollRef.current.scrollHeight;
+    const clientHeight = scrollRef.current.clientHeight;
+    const scrollTop = scrollRef.current.scrollTop;
+    const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    if (redLineRef.current) {
+      redLineRef.current.style.top = `${scrollPercent}%`;
+    }
+  };
+
   return (
     <div className="bg-white w-full max-w-4xl mx-auto p-4 rounded-lg shadow-lg">
       {/* Header Section */}
@@ -50,7 +63,7 @@ const Leaderboard = () => {
       {/* Top 3 Users Section */}
       <div className="flex flex-col items-center py-4 border-b border-gray-200">
         {/* 1st User - Centered and Slightly Higher */}
-        <div className="flex flex-col items-center mb-4"> {/* Added margin bottom */}
+        <div className="flex flex-col items-center mb-4">
           <div className="w-30 h-30 rounded-full flex items-center justify-center">
             <span className="text-9xl">🥇</span>
           </div>
@@ -86,25 +99,38 @@ const Leaderboard = () => {
         </div>
       </div>
 
-      {/* Leaderboard Items (Users beyond top 3) */}
-      <div className="py-4 max-h-64 overflow-y-auto">
-        {otherUsers.map((user) => (
-          <div key={user.name} className="flex items-center justify-between py-2 border-b border-gray-200">
-            <div className="flex items-center justify-left w-full">
-              <div className="w-8 h-8 rounded-full bg-blue-300"></div>
-              <div className="ml-4 text-center">
-                <p className="font-semibold text-xl">{user.name}</p>
-                <p className="text-yellow-500">
-                  {user.coins.toLocaleString()} 🪙
-                </p>
+      
+      <div className="relative max-h-64 overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="py-4 max-h-64 overflow-y-auto"
+          onScroll={handleScroll}
+        >
+          {otherUsers.map((user) => (
+            <div key={user.name} className="flex items-center justify-between py-2 border-b border-gray-200">
+              <div className="flex items-center justify-left w-full">
+                <div className="w-8 h-8 rounded-full bg-blue-300"></div>
+                <div className="ml-4 text-center">
+                  <p className="font-semibold text-xl">{user.name}</p>
+                  <p className="text-yellow-500">
+                    {user.coins.toLocaleString()} 🪙
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center justify-center">
+                {user.badge === 'shield' && <span className="text-gray-500">🛡️</span>}
+                {user.badge === 'shield-red' && <span className="text-red-500">🛡️</span>}
               </div>
             </div>
-            <div className="flex items-center justify-center">
-              {user.badge === 'shield' && <span className="text-gray-500">🛡️</span>}
-              {user.badge === 'shield-red' && <span className="text-red-500">🛡️</span>}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        
+        <div
+          ref={redLineRef}
+          className="absolute left-full w-2 h-full bg-red-500"
+          style={{ transition: 'top 0.2s', top: '0%' }}
+        />
       </div>
 
       {/* Current User Section */}

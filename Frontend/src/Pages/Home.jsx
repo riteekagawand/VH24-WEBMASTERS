@@ -9,7 +9,7 @@ const Home = () => {
   const [quizStarted, setQuizStarted] = useState(false);
 
   const handlePinClick = () => {
-    // Randomly select a country
+    
     const randomCountry = countryData[Math.floor(Math.random() * countryData.length)];
     setSelectedCountry(randomCountry);
     setQuizStarted(true);
@@ -62,7 +62,7 @@ const QuizComponent = ({ country }) => {
   const questions = [
     { question: `What is the capital of ${country.name}?`, options: [country.capital, 'Option B', 'Option C'], correctAnswer: country.capital },
     { question: `What is the population of ${country.name}?`, options: ['Option A', 'Option B', country.population], correctAnswer: country.population },
-    // More questions...
+    
   ];
 
   const handleAnswer = (answer) => {

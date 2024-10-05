@@ -1,43 +1,38 @@
 import { useNavigate } from 'react-router-dom';
 import Sidebar, { SidebarItem } from '../Components/Sidebar'; 
 import { Grid, BookOpen } from 'lucide-react'; 
-import LeaderBoard from '../Components/LeaderBoard';  // Assuming you have this component
-//import DailyStreakChallenge from '../Components/DailyStreakChallenege';  // Assuming you have this component
+import LeaderBoard from '../Components/LeaderBoard';  
 import DailyStreakChallenge1 from '../Components/DailyStreakChallenge1';
 import { useState } from 'react';
 
 export default function UserDashboard() {
     const [activeTab, setActiveTab] = useState('dashboard');
-    const navigate = useNavigate();  // For navigating to different pages
+    const navigate = useNavigate();  
 
     return (
         <div className="flex h-screen-max">
-            {/* Sidebar Component */}
             <Sidebar flex>
-                {/* Dashboard: Leaderboard and Daily Streak */}
                 <SidebarItem 
                     icon={<Grid />} 
                     text="Dashboard" 
                     active={activeTab === 'dashboard'} 
-                    onClick={() => setActiveTab('dashboard')}  // Toggle Dashboard view
+                    onClick={() => setActiveTab('dashboard')}  
                 />
-                {/* Training: New Page */}
                 <SidebarItem 
                     icon={<BookOpen />} 
                     text="Training" 
                     active={activeTab === 'training'} 
-                    onClick={() => navigate('/training')}  // Open Training on a new page
+                    onClick={() => navigate('/training')}  
                 />
             </Sidebar>
 
-            {/* Main Content Area */}
-            <div className="flex-1 p-4 bg-gray-50">
-                {/* Toggle views based on the active sidebar item */}
+            <div className="flex-1 p-4">
                 {activeTab === 'dashboard' && (
-                    <div>
-                        <LeaderBoard />  {/* Display Leaderboard */}
-                        <div className='mt-20'>
-                        <DailyStreakChallenge1/>
+                    <div className='mb-4'>
+                        <LeaderBoard />  
+
+                        <div className='mt-4'>
+                            <DailyStreakChallenge1/>
                         </div>
                     </div>
                 )}
