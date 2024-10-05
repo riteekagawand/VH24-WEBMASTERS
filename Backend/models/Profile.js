@@ -1,36 +1,47 @@
 import mongoose from 'mongoose';
 
-const ProfileSchema = new mongoose.Schema({
-  name: {
+const profileSchema = new mongoose.Schema({
+  email: {
     type: String,
     required: true,
   },
-  gender: {
-    type: String,
-    required: true,
+  profile: {
+    name: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: Number,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    pin: {
+      type: String,
+      required: true,
+    },
+    sftokens: {
+      type: Number,
+      required: true,
+      default:100,
+    },
   },
-  age: {
-    type: Number,
-    required: true,
-  },
-  phoneNumber: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  state: {
-    type: String,
-    required: true,
-  },
-  pin: {
-    type: String,
-    required: true,
-  },
-}, { timestamps: true });
+});
 
-const Profile = mongoose.model('Profile', ProfileSchema);
+const Profile = mongoose.model('Profile', profileSchema);
 
 export default Profile;

@@ -1,11 +1,16 @@
 // routes/profileRoutes.js
 import express from 'express';
-// import { verifyToken } from '../middleware/authMiddleware.js';
-import { getProfile, updateProfile } from '../controllers/profileController.js';
+import { createOrUpdateProfile, getProfiles } from '../controllers/profileController.js'; // Import the new function
+import { addCoinsToProfile } from '../controllers/profileController.js';
 
 const router = express.Router();
 
-router.get('/profile',  getProfile); // Get user profile
-router.post('/profile', updateProfile)
+// POST /api/profile
+router.post('/', createOrUpdateProfile);
+// router.put('/', createOrUpdateProfile);
+// GET /api/profile
+router.get('/', getProfiles); // Add the GET route for fetching profiles
 
-export default router; // Use default export
+router.post('/coins', addCoinsToProfile);
+
+export default router;

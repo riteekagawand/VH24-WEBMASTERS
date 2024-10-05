@@ -1,14 +1,13 @@
-// SomeComponent.jsx
-import React from 'react';
-import AuthButtons from './AuthButtons';
+// // SomeComponent.jsx
+// import React from 'react';
+// import AuthButtons from './AuthButtons';
 
-const SomeComponent = () => {
-  return (
-    <div>
-      <h1>Welcome to Our App!</h1>
-      <AuthButtons />
-    </div>
-  );
-};
+// const SomeComponent = () => {
+//   return (
+//     <div>
+//       <AuthButtons />
+//     </div>
+//   );
+// };
 
-export default SomeComponent;
+// export default SomeComponent;

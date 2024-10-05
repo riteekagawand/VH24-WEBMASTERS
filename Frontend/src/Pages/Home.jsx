@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className='h-full bg-white'>
       {/* <Header /> */}
-      <MainContent />
+      <MainContent className='min-h-full' />
     
       <Serve />
    
@@ -20,9 +20,9 @@ const Home = () => {
         
         <ScrollingCards direction="left" />
         <ScrollingCards direction="right" />
-
+        <Footer />
       </div>
-      <Footer />
+
     </div>
   );
 }

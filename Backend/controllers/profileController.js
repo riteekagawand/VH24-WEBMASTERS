@@ -1,88 +1,64 @@
 // controllers/profileController.js
-import User from '../models/User.js';
-import jwt from 'jsonwebtoken'; 
+import Profile from '../models/Profile.js';
 
-// Get user profile
-// Get user profile or create a new one if not found
-const getProfile = async (req, res) => {
+export const createOrUpdateProfile = async (req, res) => {
+  const { email, profile } = req.body;
+
+  // Validate incoming profile data
+  if (!profile || !profile.name || !profile.gender || !profile.age || !profile.phoneNumber || !profile.city || !profile.state || !profile.pin) {
+    return res.status(400).json({ success: false, message: 'All profile fields are required.' });
+  }
+
+  try {
+    const existingProfile = await Profile.findOne({ email });
+
+    if (existingProfile) {
+      // Update the existing profile
+      existingProfile.profile = profile;
+      await existingProfile.save();
+      return res.status(200).json({ success: true, message: 'Profile updated successfully.' });
+    } else {
+      // Create a new profile
+      const newProfile = new Profile({ email, profile });
+      await newProfile.save();
+      return res.status(201).json({ success: true, message: 'Profile created successfully.' });
+    }
+  } catch (error) {
+    console.error('Error saving profile:', error); // Log the error
+    return res.status(500).json({ success: false, message: 'Error saving profile.', error: error.message });
+  }
+};
+export const getProfiles = async (req, res) => {
     try {
-      // Attempt to find the user by ID
-      let user = await User.findById(req.volunteers.id).select('-password -otp -otpExpires'); // Exclude sensitive info
-      
-      // If no user is found, create a new one
-      if (!user) {
-        const newUser = new User({
-          _id: req.volunteers.id, // Use the ID from the request
-          // You can set other default values as needed here
-          profile: {
-            name: '', // Default name or handle as required
-            gender: '', // Default gender
-            age: null, // Default age
-            phone: '', // Default phone
-            city: '', // Default city
-            pincode: '', // Default pincode
-            state: '', // Default state
-          }
-        });
-        user = await newUser.save(); // Save the new user to the database
-      }
-  
-      // Return the user's profile
-      res.json({ success: true, profile: user.profile });
+      const profiles = await Profile.find(); // Fetch all profiles
+      return res.status(200).json(profiles); // Return profiles in the response
     } catch (error) {
-      console.error('Error fetching profile:', error);
-      res.status(500).json({ success: false, message: 'An error occurred. Please try again Later.' });
+      console.error('Error fetching profiles:', error); // Log the error
+      return res.status(500).json({ success: false, message: 'Error fetching profiles.', error: error.message });
     }
   };
 
-// Update user profile
-const updateProfile = async (req, res) => {
-    const { name, gender, age, phone, city, pincode, state } = req.body; // Capture profile data
-    const token = localStorage.getItem('token') // Extract token from Authorization header
-  console.log(token)
-    if (!token) {
-      return res.status(401).json({ success: false, message: 'No token provided, authorization denied.' });
+  export const addCoinsToProfile = async (req, res) => {
+    const { email, coins } = req.body;
+  
+    if (!email || !coins) {
+      return res.status(400).json({ success: false, message: 'Email and coins are required.' });
     }
   
     try {
-      // Verify and decode the token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your JWT secret
-      const userId = decoded.id; // Extract the user ID from the token
+      const profile = await Profile.findOne({ email });
   
-      // Update the user profile using the user ID
-      const user = await User.findByIdAndUpdate(
-        userId,
-        {
-          'profile.name': name,
-          'profile.gender': gender,
-          'profile.age': age,
-          'profile.phone': phone,
-          'profile.city': city,
-          'profile.pincode': pincode,
-          'profile.state': state,
-        },
-        { new: true, runValidators: true }
-      ).select('-password -otp -otpExpires');
-  
-      if (!user) {
-        return res.status(404).json({ success: false, message: 'User not found.' });
+      if (!profile) {
+        return res.status(404).json({ success: false, message: 'Profile not found.' });
       }
   
-      res.json({ success: true, profile: user.profile });
+      profile.coins = (profile.coins || 0) + coins; // Update coins, defaulting to 0 if undefined
+      await profile.save();
+  
+      return res.status(200).json({ success: true, message: 'Coins added successfully.', coins: profile.coins });
     } catch (error) {
-      console.error('Error updating profile:', error);
-      
-      if (error.name === 'JsonWebTokenError') {
-        return res.status(401).json({ success: false, message: 'Invalid token.' });
-      }
-      
-      if (error.name === 'TokenExpiredError') {
-        return res.status(401).json({ success: false, message: 'Token has expired.' });
-      }
-  
-      res.status(500).json({ success: false, message: 'An error occurred. Please try again.' });
+      console.error('Error updating coins:', error);
+      return res.status(500).json({ success: false, message: 'Error updating coins.', error: error.message });
     }
   };
   
-
-export { getProfile, updateProfile };

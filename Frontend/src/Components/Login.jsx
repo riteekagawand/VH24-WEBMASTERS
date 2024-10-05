@@ -51,7 +51,8 @@ const LoginForm = () => {
       // Assuming a successful login, call the login function from the context
       login(data.token); // Store token in context
       toast.success('Login successful!'); // Notify success
-      navigate('/'); // Navigate to the user dashboard
+      navigate('/');
+      window.location.reload(); // Navigate to the user dashboard
     } catch (error) {
       setError(error.message); // Update error state
       toast.error(error.message); // Notify error
