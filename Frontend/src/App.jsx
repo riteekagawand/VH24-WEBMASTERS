@@ -34,9 +34,9 @@ function App() {
         <Navbar />
         <div>
           <GoogleTranslate />
-          <ToastContainer />
+          
         </div>
-        
+        <ToastContainer />
 
   
 
