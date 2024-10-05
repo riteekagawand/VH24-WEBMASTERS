@@ -1,9 +1,9 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Confetti from 'react-confetti';
-import backg from '../assets/backg.jpg';
+import backg from '../assets/bgdark.jpg';
 import backg2 from '../assets/backg2.jpg';
-import backg3 from '../assets/backg3.jpg';
+import backg3 from '../assets/bgdark2.jpg';
 import MapComponent from '../Components/MapComponent';
 
 const DeliveryOptionDetail = () => {
@@ -32,7 +32,7 @@ const DeliveryOptionDetail = () => {
       options: [
         { id: 1, description: "Route 1: Long route with heavy traffic", details: "This route takes you through busy market areas and narrow roads, which often cause significant delays due to congestion, especially during peak hours." },
         { id: 2, description: "Route 2: Shortcut with high traffic", details: "Although shorter, this route goes through a high-traffic zone and has many intersections with slow-moving vehicles, causing potential delays." },
-        { id: 3, description: "Route 3: Shortcut with medium traffic", details: "This route is a balanced choice, with moderate traffic." },
+        { id: 3, description: "Route 3: Shortcut with medium traffic", details: "This route is a balanced choice, with moderate traffic. It has less congested roads." },
       ],
     },
     2: {
@@ -88,7 +88,7 @@ const DeliveryOptionDetail = () => {
       <h2 className="text-5xl font-bold mb-4 mt-[-5px] text-red-500">{title}</h2>
       <p className="text-lg text-center mb-6 max-w-4xl">{description}</p>
       <div><MapComponent origin={currentLocation} destination={destination}/></div>
-      <h3 className="text-3xl mb-6 text-center text">Choose Your Route Option</h3>
+      <h3 className="text-3xl mb-6 text-center">Choose Your Route Option</h3>
       <br />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
         {options.map((option) => (
@@ -100,19 +100,19 @@ const DeliveryOptionDetail = () => {
             onClick={() => handleRouteSelect(option.id)}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-50"
+              className="absolute inset-0 bg-cover bg-center opacity-85 shadow-lg"
               style={{ backgroundImage: `url(${backgroundImages[option.id]})` }}
             ></div>
             <div className="relative p-4 flex flex-col items-center z-10">
-              <h4 className="text-xl font-semibold mb-2">{option.description}</h4>
-              <p className="text-gray-600">{option.details}</p>
+              <h4 className="text-xl font-semibold text-white mb-2 mt-12">{option.description}</h4>
+              <p className="text-white mb-44">{option.details}</p>
             </div>
           </div>
         ))}
       </div>
       {showModal && (
-        <div className={`fixed inset-0 flex items-center justify-center z-50 ${isCorrect ? 'bg-green-300' : 'bg-red-300'} transition-opacity duration-300`}>
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+        <div className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300`}>
+          <div className={`bg-white rounded-lg shadow-lg p-8 text-center ${isCorrect ? 'bg-green-100' : 'bg-red-100'}`}>
             {isCorrect ? (
               <>
                 <h2 className="text-2xl font-bold mb-4">Correct Choice!</h2>

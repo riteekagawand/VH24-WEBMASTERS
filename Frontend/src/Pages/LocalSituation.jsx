@@ -36,7 +36,7 @@ const LocalSituation = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-5">
       <h2 className="text-5xl font-bold mb-4 mt-[-40px]">
-        Choose Your <span className="text-blue-600 font-pacifico">Local</span> Situation!
+        Choose Your <span className="text-bred-500 font-pacifico">Local</span> Situation!
       </h2>
       <br />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-9 max-w-6xl">
