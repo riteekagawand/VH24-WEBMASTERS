@@ -3,21 +3,59 @@ import { FaLock, FaGithub } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 import { FcGoogle } from 'react-icons/fc';
 import { BiHide } from "react-icons/bi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { RxEyeOpen } from "react-icons/rx";
+import { useAuth } from '../context/AuthContext'; // Import useAuth for authentication
+import { toast } from 'react-toastify'; // Import toast for notifications
 
-const LoginForm = ({ toggleForm }) => {
+const LoginForm = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [error, setError] = useState(''); // Error state
+  const navigate = useNavigate(); // Initialize useNavigate
+  const { isAuthenticated, login, logout } = useAuth(); // Access authentication context
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    alert('Login Successful');
+
+    const { email, password } = form; // Destructure form state
+
+    // Reset error message
+    setError('');
+
+    // Simple validation
+    if (!email || !password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json(); // Parse the JSON response
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed. Please check your credentials.');
+      }
+
+      // Assuming a successful login, call the login function from the context
+      login(data.token); // Store token in context
+      toast.success('Login successful!'); // Notify success
+      navigate('/'); // Navigate to the user dashboard
+    } catch (error) {
+      setError(error.message); // Update error state
+      toast.error(error.message); // Notify error
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -25,15 +63,9 @@ const LoginForm = ({ toggleForm }) => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100 relative">
-      {/* Black background div */}
-      <div className="absolute rotate-3 h-[400px] w-[800px] rounded-[50px] bg-black hover:bg-[#F07C7C] "></div>
-
-      {/* White form container */}
+    <div className="h-[400px] rounded-[50px] mt-[110px] flex justify-center items-center relative">
       <div className="relative h-[400px] w-[800px] rounded-[50px] border border-black bg-white p-6 z-10">
         <div className="max-w-5xl h-auto flex justify-center items-center">
-          {/* Main Container */}
-
           {/* Left side (Login Form) */}
           <div className="w-2/3 pr-4">
             <div className="flex flex-col ml-5 justify-start items-start">
@@ -83,29 +115,39 @@ const LoginForm = ({ toggleForm }) => {
                 </a>
               </div>
 
-              {/* Login Button */}
+              {/* Conditional Rendering for Login/Logout Button */}
               <div className="flex justify-center items-center">
-                <button className="w-[150px] bg-yellow-500 text-white py-3 rounded-[50px] hover:bg-yellow-600 transition-colors">
-                  Login
-                </button>
+                {isAuthenticated ? (
+                  <button
+                    className="w-[150px] bg-red-500 text-white py-3 rounded-[50px] hover:bg-red-600 transition-colors"
+                    onClick={logout}
+                  >
+                    Login
+                  </button>
+                ) : (
+                  <button
+                    className="w-[150px] bg-red-500 text-white py-3 rounded-[50px] hover:bg-red-600 transition-colors"
+                    type="submit"
+                    disabled={isAuthenticated} // Disable if logged in
+                  >
+                    Login
+                  </button>
+                )}
               </div>
 
               <div className="text-center mt-4">
                 <span>
                   Don't have an account?{' '}
-                  <Link to="/register"
-                    className="text-blue-500 cursor-pointer hover:underline"
-                    onClick={toggleForm}
-                  >
+                  <Link to="/register" className="text-blue-500 cursor-pointer hover:underline">
                     Register
                   </Link>
                 </span>
               </div>
+
+              {/* Display error message if there is one */}
+              {error && <p className="text-red-500 text-center">{error}</p>}
             </form>
           </div>
-
-          {/* Separator - dotted line */}
-          <div className="border-l border-dotted border-gray-300"></div>
 
           {/* Right side (Social logins) */}
           <div className="w-1/3 pl-4 flex flex-col justify-normal mt-[-90px]">

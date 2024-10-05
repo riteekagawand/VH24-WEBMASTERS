@@ -1,22 +1,28 @@
+// server.js
 import express from 'express';
-import connectDB from './config/db.js'; // Ensure your connection setup is in this file
+import mongoose from 'mongoose';
+import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
+import profileRoutes from './routes/profileRoutes.js'; 
 import dotenv from 'dotenv';
-import cors from 'cors'; // Import the cors package
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
-
-// Connect to the database
-connectDB();
-
-// Middleware
-app.use(cors({ origin: 'http://localhost:5173' })); // Enable CORS for the specified origin
-app.use(express.json()); // Parse JSON requests
-
-// Routes
-app.use('/api/auth', authRoutes); // API for authentication
-
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.use(cors());
+app.use(express.json());
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/user', profileRoutes);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

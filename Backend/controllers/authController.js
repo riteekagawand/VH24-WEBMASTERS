@@ -1,21 +1,37 @@
-// controllers/authController.js
 import User from '../models/User.js';
 import nodemailer from 'nodemailer';
+import bcrypt from 'bcryptjs'; // For password hashing
+import jwt from 'jsonwebtoken'; // For token generation
 
+// Generate OTP
+const generateOtp = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
+};
+
+// Controller for user registration
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
-  try {
-    const newUser = new User({ username, email, password });
-    const otp = newUser.generateOtp(); // Generate OTP
 
-    await newUser.save(); // Save the user along with OTP and expiry time
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: 'Email is already registered.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+
+    const otp = generateOtp(); // Generate the OTP
+    const otpExpires = Date.now() + 5 * 60 * 1000; // Set OTP expiration time (5 minutes)
+
+    const newUser = new User({ username, email, password: hashedPassword, otp, otpExpires });
+    await newUser.save();
 
     // Send OTP via email
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.EMAIL_USER, // Store in .env
+        pass: process.env.EMAIL_PASS,  // Store in .env
       },
     });
 
@@ -29,46 +45,52 @@ const registerUser = async (req, res) => {
     res.status(201).json({ success: true, message: 'OTP sent to your email!' });
   } catch (error) {
     console.error('Error during registration:', error);
-    res.status(500).json({ success: false, message: 'An error occurred. Please try again.' });
+    res.status(500).json({ success: false, message: 'An error occurred during registration.' });
   }
 };
 
-
+// Controller for OTP verification
 const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
-  console.log('Verifying OTP for email:', email); // Log incoming email
 
   try {
     const user = await User.findOne({ email });
-
-    if (!user) {
-      console.log('User not found:', email); // Log if user is not found
-      return res.status(400).json({ success: false, message: 'User not found.' });
-    }
-
-    // Log user and OTP for debugging
-    console.log('User found:', user);
-    console.log('User OTP:', user.otp);
-    console.log('Incoming OTP:', otp);
-    
-    // Check if OTP matches and hasn't expired
-    if (user.otp !== otp || user.otpExpires < Date.now()) {
-      console.log('Invalid or expired OTP:', otp); // Log OTP mismatch
+    if (!user || user.otp !== otp || user.otpExpires < Date.now()) {
       return res.status(400).json({ success: false, message: 'Invalid or expired OTP.' });
     }
 
-    // Clear OTP after successful verification
-    user.otp = undefined; 
-    user.otpExpires = undefined;
+    user.otp = undefined; // Clear OTP after successful verification
+    user.otpExpires = undefined; // Clear expiration timestamp
     await user.save();
 
     res.json({ success: true, message: 'Registration successful!' });
   } catch (error) {
     console.error('Error verifying OTP:', error);
-    res.status(500).json({ success: false, message: 'An error occurred. Please try again.' });
+    res.status(500).json({ success: false, message: 'An error occurred during OTP verification.' });
   }
 };
 
+// Controller for user login
+const loginUser = async (req, res) => {
+  const { email, password } = req.body; // Capture email and password from the request body
 
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+    }
 
-export { registerUser, verifyOtp }; // Use named exports
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+    }
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ success: true, token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ success: false, message: 'An error occurred during login.' });
+  }
+};
+
+export { registerUser, verifyOtp, loginUser }; // Use named exports
