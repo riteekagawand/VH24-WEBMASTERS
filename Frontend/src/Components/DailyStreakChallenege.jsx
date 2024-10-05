@@ -39,8 +39,8 @@ const DailyStreakChallenge = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center space-y-6">
-        <h2 className="text-3xl mb-6 font-semibold">Daily Streak Challenge</h2>
+      <div className="flex flex-col items-center space-y-4">
+        <h2 className="text-3xl mb-2 font-semibold">Daily Rewards</h2>
 
         <div className="flex items-center space-x-6">
           {/* Day Progress */}
@@ -48,7 +48,7 @@ const DailyStreakChallenge = () => {
             <div key={index} className="flex flex-col items-center">
               <div
                 className={`w-24 h-24 rounded-full flex items-center justify-center ${
-                  dayUnlocked ? 'bg-red-500' : 'bg-gray-50'
+                  dayUnlocked ? 'bg-red-500' : 'bg-red-50'
                 }`} // Increased size: w-24 h-24
               >
                 {dayUnlocked ? (
