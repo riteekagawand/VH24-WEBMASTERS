@@ -38,18 +38,18 @@ const DailyStreakChallenge = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-white text-black">
+    <div>
       <div className="flex flex-col items-center space-y-6">
-        <h2 className="text-2xl mb-6">Daily Streak Challenge</h2>
+        <h2 className="text-3xl mb-6 font-semibold">Daily Streak Challenge</h2>
 
         <div className="flex items-center space-x-6">
           {/* Day Progress */}
           {daysUnlocked.map((dayUnlocked, index) => (
             <div key={index} className="flex flex-col items-center">
               <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                  dayUnlocked ? 'bg-yellow-400' : 'bg-gray-50'
-                }`}
+                className={`w-24 h-24 rounded-full flex items-center justify-center ${
+                  dayUnlocked ? 'bg-red-500' : 'bg-gray-50'
+                }`} // Increased size: w-24 h-24
               >
                 {dayUnlocked ? (
                   <span>{index + 1}</span>
@@ -64,7 +64,7 @@ const DailyStreakChallenge = () => {
 
         {/* Collect button */}
         <button
-          className="mt-6 bg-yellow-500 text-black px-4 py-2 rounded hover:bg-yellow-400 disabled:opacity-50"
+          className="mt-6 bg-red-500 text-black px-6 py-3 rounded-md hover:bg-red-400 disabled:opacity-50"
           disabled={!daysUnlocked[currentDay - 1]} // Disable if the current day is not unlocked yet
           onClick={() => handleCollect(currentDay)} // Handle collection for the current day
         >
