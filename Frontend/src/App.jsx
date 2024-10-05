@@ -6,7 +6,8 @@ import Home from './Pages/Home';
 import GameHome from './Pages/GameHome';
 import DeliveryOptions from './Pages/DeliveryOptions';
 import DeliveryOptionDetail from './Pages/DeliveryOptionDetail';
-import LocalSituationOptions from './Pages/LocalSituationHandlingOptions';
+import LocalSituationOptions from './Pages/LocalSituation';
+import LocalSituationDetail from './Pages/LocalSituationDetail';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/delivery" element={<DeliveryOptions />} />
           <Route path="/delivery/:situationId" element={<DeliveryOptionDetail />} />
           <Route path="/local-situation" element={<LocalSituationOptions />} />
+          <Route path="/local-situation/:situationId" element={<LocalSituationDetail />} />
         </Routes>
       </div>
     </Router>
