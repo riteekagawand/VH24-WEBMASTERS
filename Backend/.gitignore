@@ -1,11 +1,9 @@
-<<<<<<< HEAD
-
 
 node_modules
 dist
 dist-ssr
 *.local
-
+.env
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -16,7 +14,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-=======
 node_modules
-.env
->>>>>>> c7a4484ffd9b0a14aacc8c35c90f4190b1b893d0
+
